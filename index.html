@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Cooling App</title>
+    <link rel="manifest" href="data:application/manifest+json,{'name':'Cooler','display':'standalone'}">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6">
+
+    <div class="max-w-sm mx-auto bg-white rounded-3xl shadow-lg overflow-hidden mt-10">
+        
+        <div id="x1" class="bg-orange-500 p-10 text-white text-center transition-colors">
+            <h1 id="x2" class="text-2xl font-bold uppercase">Hot Area</h1>
+            <p id="x3" class="text-xs opacity-90">Buildings trap heat</p>
+            <div id="x4" class="text-6xl mt-4">🏙️</div>
+        </div>
+
+        <div class="p-6 space-y-4">
+            <div class="w-full bg-gray-200 h-3 rounded-full overflow-hidden">
+                <div id="x5" class="bg-green-500 h-full transition-all" style="width: 0%"></div>
+            </div>
+
+            <div class="flex justify-between items-center p-2">
+                <span class="text-sm font-bold text-gray-400 tracking-widest">PROGRESS</span>
+                <span id="x6" class="text-3xl font-black text-green-600">0</span>
+            </div>
+
+            <button onclick="go()" class="w-full bg-green-500 text-white py-4 rounded-2xl font-bold text-lg shadow-md active:scale-95 transition-transform">
+                🌲 PLANT
+            </button>
+
+            <button onclick="re()" class="w-full py-2 text-gray-400 text-xs font-bold hover:text-red-400 transition-colors">
+                [ RESET ]
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let n = 0;
+        let e1 = document.getElementById('x1');
+        let e2 = document.getElementById('x2');
+        let e3 = document.getElementById('x3');
+        let e4 = document.getElementById('x4');
+        let e5 = document.getElementById('x5');
+        let e6 = document.getElementById('x6');
+
+        function go() {
+            n++;
+            e6.innerText = n;
+            e5.style.width = (n * 10) + "%";
+
+            if (n >= 10) {
+                e1.style.backgroundColor = "#3b82f6"; 
+                e2.innerText = "NEUTRAL";
+                e3.innerText = "Air is balanced";
+                e4.innerText = "🍃";
+            } else if (n >= 5) {
+                e1.style.backgroundColor = "#22c55e"; 
+                e2.innerText = "COOLING";
+                e3.innerText = "Nature is helping";
+                e4.innerText = "🌲";
+            }
+        }
+
+        function re() {
+            n = 0;
+            e6.innerText = n;
+            e5.style.width = "0%";
+            e1.style.backgroundColor = "#f97316";
+            e2.innerText = "Hot Area";
+            e3.innerText = "Buildings trap heat";
+            e4.innerText = "🏙️";
+        }
+  if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register("/service-worker.js")
+          .then(() => {
+            console.log("ayos! rehistro as service worker");
+          })
+          .catch((error) => {
+            console.log("Registration failed: ", error);
+          });
+      }
+  
+  
+    </script>
+</body>
+</html>
