@@ -1,5 +1,5 @@
 {
-  "name": "To-Do-List",
+  "name": "Cooling App",
   "short_name": "DT",
   "start_url": "./index.html",
   "display": "standalone",
@@ -17,4 +17,5 @@
       "type": "image/png"
     }
   ]
+
 }
